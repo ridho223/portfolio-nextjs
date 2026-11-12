@@ -1,103 +1,141 @@
-import Image from "next/image";
+'use client'
+
+import Navbar from '@/components/Navbar'
+import About from '@/components/About'
+import Skills from '@/components/Skills'
+import Projects from '@/components/Projects'
+import Contact from '@/components/Contact'
+import Scene3DWrapper from '@/components/Scene3DWrapper'
+import { useSite } from '@/components/SiteProvider'
+import InteractiveBackground from '@/components/InteractiveBackground'
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { language } = useSite()
+  const isID = language === 'id'
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main className="site-background relative min-h-screen text-[var(--foreground)] transition-colors duration-300">
+      <InteractiveBackground />
+      <Navbar />
+
+      {/* HERO */}
+      <section
+        id="home"
+        className="relative mx-auto flex min-h-screen max-w-7xl items-center px-6 pb-24 pt-32"
+      >
+        <div className="grid w-full items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+
+          {/* HERO CONTENT */}
+          <div className="relative z-10">
+            <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-[var(--line)] bg-[var(--surface)]/80 px-4 py-2 text-xs text-[var(--muted)] backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+
+              {isID
+                ? 'Mahasiswa Teknologi Informasi · Universitas Brawijaya'
+                : 'Information Technology Student · Brawijaya University'}
+            </div>
+
+            <p className="mb-4 font-mono text-sm tracking-wide text-[var(--accent)]">
+              {isID ? 'Halo, saya' : "Hello, I'm"}
+            </p>
+
+            <h1 className="max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+              Ahmad Saifur
+              <span className="block text-[var(--muted)]">
+                Ridho<span className="text-[var(--accent)]">.</span>
+              </span>
+            </h1>
+
+            <h2 className="mt-7 text-xl font-medium tracking-tight sm:text-2xl">
+              Backend Developer
+              <span className="ml-2 text-[var(--muted)]">/ Laravel &amp; PHP</span>
+            </h2>
+
+            <p className="mt-5 max-w-xl text-sm leading-8 text-[var(--muted)] sm:text-base">
+              {isID
+                ? 'Saya membangun aplikasi web menggunakan PHP, Laravel, dan MySQL. Memiliki pengalaman mengembangkan fitur backend, mengelola database, serta membangun REST API. Saat ini saya terus mengembangkan kemampuan di bidang web development.'
+                : 'I build web applications using PHP, Laravel, and MySQL. I have experience developing backend features, managing databases, and building REST APIs. I am continuously improving my web development skills.'}
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-[var(--background)] transition hover:-translate-y-1 hover:opacity-85"
+              >
+                {isID ? 'Lihat Proyek' : 'View Projects'} ↗
+              </a>
+
+              <a
+                href="#contact"
+                className="rounded-full border border-[var(--line)] bg-[var(--surface)]/60 px-6 py-3 text-sm font-medium backdrop-blur transition hover:-translate-y-1 hover:border-[var(--accent)]"
+              >
+                {isID ? 'Hubungi Saya' : 'Contact Me'}
+              </a>
+            </div>
+
+            <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-[var(--line)] pt-6 text-xs font-mono text-[var(--muted)]">
+              <span>PHP</span>
+              <span className="text-[var(--accent)]">/</span>
+              <span>Laravel</span>
+              <span className="text-[var(--accent)]">/</span>
+              <span>MySQL</span>
+              <span className="text-[var(--accent)]">/</span>
+              <span>REST API</span>
+              <span className="text-[var(--accent)]">/</span>
+              <span>Git</span>
+            </div>
+          </div>
+
+          {/* 3D LANYARD */}
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/15 blur-[110px]" />
+
+            <div className="relative z-10">
+              <Scene3DWrapper />
+            </div>
+
+            {/* label ditaruh di bawah canvas (bukan absolute) supaya tidak menimpa kartu */}
+            <p className="relative z-10 mt-2 text-center text-[10px] font-mono tracking-[0.2em] text-[var(--muted)]">
+              {isID ? 'IDENTITY CARD · 2026' : 'PERSONAL IDENTITY · 2026'}
+            </p>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+
+        {/* SCROLL INDICATOR: cuma muncul kalau layar cukup tinggi, biar tidak tabrakan dengan konten */}
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#about"
+          aria-label="Scroll to About"
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-[10px] font-mono tracking-[0.25em] text-[var(--muted)] transition hover:text-[var(--accent)] [@media(min-height:860px)_and_(min-width:768px)]:flex"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          <span>{isID ? 'GULIR KE BAWAH' : 'SCROLL TO EXPLORE'}</span>
+          <span className="h-10 w-px bg-gradient-to-b from-[var(--accent)] to-transparent" />
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* SECTION DIVIDERS */}
+      <div className="section-divider" />
+      <About />
+
+      <div className="section-divider" />
+      <Skills />
+
+      <div className="section-divider" />
+      <Projects />
+
+      <div className="section-divider" />
+      <Contact />
+
+      <footer className="relative border-t border-[var(--line)] px-6 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-xs text-[var(--muted)] sm:flex-row">
+          <p>© 2026 Ahmad Saifur Ridho</p>
+          <p className="font-mono">
+            {isID ? 'Dibuat dengan Next.js & Three.js' : 'Built with Next.js & Three.js'}
+          </p>
+        </div>
       </footer>
-    </div>
-  );
+    </main>
+  )
 }
